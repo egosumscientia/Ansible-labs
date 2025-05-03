@@ -1,0 +1,309 @@
+buntu@ip-172-31-28-113:~$ sudo add-apt-repository --yes --update ppa:ansible/ansible
+Repository: 'deb https://ppa.launchpadcontent.net/ansible/ansible/ubuntu/ jammy main'
+Description:
+Ansible is a radically simple IT automation platform that makes your applications and systems easier to deploy. Avoid writing scripts or custom code to deploy and update your applications— automate in a language that approaches plain English, using SSH, with no agents to install on remote systems.
+
+http://ansible.com/
+
+If you face any issues while installing Ansible PPA, file an issue here:
+https://github.com/ansible-community/ppa/issues
+More info: https://launchpad.net/~ansible/+archive/ubuntu/ansible
+Adding repository.
+Adding deb entry to /etc/apt/sources.list.d/ansible-ubuntu-ansible-jammy.list
+Adding disabled deb-src entry to /etc/apt/sources.list.d/ansible-ubuntu-ansible-jammy.list
+Adding key to /etc/apt/trusted.gpg.d/ansible-ubuntu-ansible.gpg with fingerprint 6125E2A8C77F2818FB7BD15B93C4A3FD7BB9C367
+Hit:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy InRelease
+Hit:2 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy-updates InRelease                  
+Hit:3 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy-backports InRelease                
+Hit:4 http://security.ubuntu.com/ubuntu jammy-security InRelease                              
+Get:5 https://ppa.launchpadcontent.net/ansible/ansible/ubuntu jammy InRelease [18.0 kB]
+Get:6 https://ppa.launchpadcontent.net/ansible/ansible/ubuntu jammy/main amd64 Packages [1120 B]
+Get:7 https://ppa.launchpadcontent.net/ansible/ansible/ubuntu jammy/main Translation-en [752 B]
+Fetched 19.9 kB in 1s (21.0 kB/s)
+Reading package lists... Done
+ubuntu@ip-172-31-28-113:~$ sudo apt install -y ansible
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  ansible-core python3-jmespath python3-kerberos python3-nacl python3-ntlm-auth python3-packaging python3-paramiko python3-requests-kerberos python3-requests-ntlm python3-resolvelib
+  python3-winrm python3-xmltodict sshpass
+Suggested packages:
+  python-nacl-doc python3-gssapi python3-invoke
+The following NEW packages will be installed:
+  ansible ansible-core python3-jmespath python3-kerberos python3-nacl python3-ntlm-auth python3-packaging python3-paramiko python3-requests-kerberos python3-requests-ntlm
+  python3-resolvelib python3-winrm python3-xmltodict sshpass
+0 upgraded, 14 newly installed, 0 to remove and 221 not upgraded.
+Need to get 19.3 MB of archives.
+After this operation, 213 MB of additional disk space will be used.
+Get:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy/main amd64 python3-packaging all 21.3-1 [30.7 kB]
+Get:2 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 python3-resolvelib all 0.8.1-1 [23.6 kB]
+Get:3 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy/main amd64 python3-jmespath all 0.10.0-1 [21.7 kB]
+Get:4 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 python3-kerberos amd64 1.1.14-3.1build5 [23.0 kB]
+Get:5 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy/main amd64 python3-nacl amd64 1.5.0-2 [63.1 kB]
+Get:6 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 python3-ntlm-auth all 1.4.0-1 [20.4 kB]
+Get:7 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-paramiko all 2.9.3-0ubuntu1.3 [134 kB]
+Get:8 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 python3-requests-kerberos all 0.12.0-2 [11.9 kB]
+Get:9 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 python3-requests-ntlm all 1.1.0-1.1 [6160 B]
+Get:10 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 python3-xmltodict all 0.12.0-2 [12.6 kB]
+Get:11 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 python3-winrm all 0.3.0-2 [21.7 kB]
+Get:12 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 sshpass amd64 1.09-1 [11.7 kB]
+Get:13 https://ppa.launchpadcontent.net/ansible/ansible/ubuntu jammy/main amd64 ansible-core all 2.17.11-1ppa~jammy [1017 kB]
+Get:14 https://ppa.launchpadcontent.net/ansible/ansible/ubuntu jammy/main amd64 ansible all 10.7.0-1ppa~jammy [17.9 MB]
+Fetched 19.3 MB in 3s (7535 kB/s)   
+Selecting previously unselected package python3-packaging.
+(Reading database ... 64772 files and directories currently installed.)
+Preparing to unpack .../00-python3-packaging_21.3-1_all.deb ...
+Unpacking python3-packaging (21.3-1) ...
+Selecting previously unselected package python3-resolvelib.
+Preparing to unpack .../01-python3-resolvelib_0.8.1-1_all.deb ...
+Unpacking python3-resolvelib (0.8.1-1) ...
+Selecting previously unselected package ansible-core.
+Preparing to unpack .../02-ansible-core_2.17.11-1ppa~jammy_all.deb ...
+Unpacking ansible-core (2.17.11-1ppa~jammy) ...
+Selecting previously unselected package ansible.
+Preparing to unpack .../03-ansible_10.7.0-1ppa~jammy_all.deb ...
+Unpacking ansible (10.7.0-1ppa~jammy) ...
+Selecting previously unselected package python3-jmespath.
+Preparing to unpack .../04-python3-jmespath_0.10.0-1_all.deb ...
+Unpacking python3-jmespath (0.10.0-1) ...
+Selecting previously unselected package python3-kerberos.
+Preparing to unpack .../05-python3-kerberos_1.1.14-3.1build5_amd64.deb ...
+Unpacking python3-kerberos (1.1.14-3.1build5) ...
+Selecting previously unselected package python3-nacl.
+Preparing to unpack .../06-python3-nacl_1.5.0-2_amd64.deb ...
+Unpacking python3-nacl (1.5.0-2) ...
+Selecting previously unselected package python3-ntlm-auth.
+Preparing to unpack .../07-python3-ntlm-auth_1.4.0-1_all.deb ...
+Unpacking python3-ntlm-auth (1.4.0-1) ...
+Selecting previously unselected package python3-paramiko.
+Preparing to unpack .../08-python3-paramiko_2.9.3-0ubuntu1.3_all.deb ...
+Unpacking python3-paramiko (2.9.3-0ubuntu1.3) ...
+Selecting previously unselected package python3-requests-kerberos.
+Preparing to unpack .../09-python3-requests-kerberos_0.12.0-2_all.deb ...
+Unpacking python3-requests-kerberos (0.12.0-2) ...
+Selecting previously unselected package python3-requests-ntlm.
+Preparing to unpack .../10-python3-requests-ntlm_1.1.0-1.1_all.deb ...
+Unpacking python3-requests-ntlm (1.1.0-1.1) ...
+Selecting previously unselected package python3-xmltodict.
+Preparing to unpack .../11-python3-xmltodict_0.12.0-2_all.deb ...
+Unpacking python3-xmltodict (0.12.0-2) ...
+Selecting previously unselected package python3-winrm.
+Preparing to unpack .../12-python3-winrm_0.3.0-2_all.deb ...
+Unpacking python3-winrm (0.3.0-2) ...
+Selecting previously unselected package sshpass.
+Preparing to unpack .../13-sshpass_1.09-1_amd64.deb ...
+Unpacking sshpass (1.09-1) ...
+Setting up python3-ntlm-auth (1.4.0-1) ...
+Setting up python3-resolvelib (0.8.1-1) ...
+Setting up python3-kerberos (1.1.14-3.1build5) ...
+Setting up sshpass (1.09-1) ...
+Setting up python3-xmltodict (0.12.0-2) ...
+Setting up python3-packaging (21.3-1) ...
+Setting up python3-jmespath (0.10.0-1) ...
+Setting up python3-requests-kerberos (0.12.0-2) ...
+Setting up python3-nacl (1.5.0-2) ...
+Setting up python3-requests-ntlm (1.1.0-1.1) ...
+Setting up ansible-core (2.17.11-1ppa~jammy) ...
+Setting up python3-winrm (0.3.0-2) ...
+Setting up ansible (10.7.0-1ppa~jammy) ...
+Setting up python3-paramiko (2.9.3-0ubuntu1.3) ...
+Processing triggers for man-db (2.10.2-1) ...
+Scanning processes...                                                                                                                                                                   
+Scanning linux images...                                                                                                                                                                
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@ip-172-31-28-113:~$ ansible --version
+ansible [core 2.17.11]
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = ['/home/ubuntu/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3/dist-packages/ansible
+  ansible collection location = /home/ubuntu/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/bin/ansible
+  python version = 3.10.12 (main, Jun 11 2023, 05:26:28) [GCC 11.4.0] (/usr/bin/python3)
+  jinja version = 3.0.3
+  libyaml = True
+ubuntu@ip-172-31-28-113:~$ mkdir -p ~/ansible-lab
+ubuntu@ip-172-31-28-113:~$ cd ~/ansible-lab
+ubuntu@ip-172-31-28-113:~/ansible-lab$ nano hosts
+ubuntu@ip-172-31-28-113:~/ansible-lab$ nano hosts
+ubuntu@ip-172-31-28-113:~/ansible-lab$ cd /home/ubuntu
+ubuntu@ip-172-31-28-113:~$ ls -a
+.  ..  .ansible  .bash_logout  .bashrc  .cache  .local  .profile  .ssh  .sudo_as_admin_successful  ansible-key.pem  ansible-lab
+ubuntu@ip-172-31-28-113:~$ chmod 400 ansible-key.pem 
+ubuntu@ip-172-31-28-113:~$ nano create_file.yml
+ubuntu@ip-172-31-28-113:~$ nano create_file.yml
+ubuntu@ip-172-31-28-113:~$ ansible-playbook -i hosts create_file.yml
+[WARNING]: Unable to parse /home/ubuntu/hosts as an inventory source
+[WARNING]: No inventory was parsed, only implicit localhost is available
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+[WARNING]: Could not match supplied host pattern, ignoring: nodos
+
+PLAY [Crear un archivo en el host remoto] **********************************************************************************************************************************************
+skipping: no hosts matched
+
+PLAY RECAP *****************************************************************************************************************************************************************************
+
+ubuntu@ip-172-31-28-113:~$ ssh -i ansible-key.pem ubuntu@54.160.239.239
+Welcome to Ubuntu 22.04.3 LTS (GNU/Linux 6.2.0-1014-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Fri May  2 23:57:34 UTC 2025
+
+  System load:  0.0               Processes:             100
+  Usage of /:   20.8% of 7.57GB   Users logged in:       0
+  Memory usage: 22%               IPv4 address for eth0: 172.31.29.186
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+New release '24.04.2 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Fri May  2 23:53:27 2025 from 54.90.120.12
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@ip-172-31-29-186:~$ cat /tmp/archivo_ansible.txt
+cat: /tmp/archivo_ansible.txt: No such file or directory
+ubuntu@ip-172-31-29-186:~$ cd ~/ansible-lab
+-bash: cd: /home/ubuntu/ansible-lab: No such file or directory
+ubuntu@ip-172-31-29-186:~$ pwd
+/home/ubuntu
+ubuntu@ip-172-31-29-186:~$ ssh -i ansible-key.pem ubuntu@54.90.120.12
+Warning: Identity file ansible-key.pem not accessible: No such file or directory.
+The authenticity of host '54.90.120.12 (54.90.120.12)' can't be established.
+ED25519 key fingerprint is SHA256:GGFu2vR44h//6Xr6ODUSZmoL1sXc1oe0WPkJBGON5BA.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '54.90.120.12' (ED25519) to the list of known hosts.
+ubuntu@54.90.120.12: Permission denied (publickey).
+ubuntu@ip-172-31-29-186:~$ cd ~/ansible-lab
+ls
+-bash: cd: /home/ubuntu/ansible-lab: No such file or directory
+ubuntu@ip-172-31-29-186:~$ exit
+logout
+Connection to 54.160.239.239 closed.
+ubuntu@ip-172-31-28-113:~$ exit
+logout
+Connection to 54.90.120.12 closed.
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab01$ ssh -i ansible-key.pem ubuntu@54.90.120.12
+Welcome to Ubuntu 22.04.3 LTS (GNU/Linux 6.2.0-1014-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Fri May  2 23:59:16 UTC 2025
+
+  System load:  0.0205078125      Processes:             102
+  Usage of /:   29.8% of 7.57GB   Users logged in:       0
+  Memory usage: 29%               IPv4 address for eth0: 172.31.28.113
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+230 updates can be applied immediately.
+140 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+1 additional security update can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+New release '24.04.2 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Fri May  2 23:52:41 2025 from 191.92.22.183
+ubuntu@ip-172-31-28-113:~$ cd ~/ansible-lab
+ls
+hosts
+ubuntu@ip-172-31-28-113:~/ansible-lab$ nano create_file.yml
+ubuntu@ip-172-31-28-113:~/ansible-lab$ ansible-playbook -i hosts create_file.yml
+
+PLAY [Crear un archivo en el host remoto] **********************************************************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************************************************************
+[WARNING]: Platform linux on host host_remoto is using the discovered Python interpreter at /usr/bin/python3.10, but future installation of another Python interpreter could change the
+meaning of that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [host_remoto]
+
+TASK [Crear archivo de prueba] *********************************************************************************************************************************************************
+changed: [host_remoto]
+
+PLAY RECAP *****************************************************************************************************************************************************************************
+host_remoto                : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+ubuntu@ip-172-31-28-113:~/ansible-lab$ ssh -i ansible-key.pem ubuntu@54.160.239.239
+Warning: Identity file ansible-key.pem not accessible: No such file or directory.
+ubuntu@54.160.239.239: Permission denied (publickey).
+ubuntu@ip-172-31-28-113:~/ansible-lab$ ls -l ansible-key.pem
+ls: cannot access 'ansible-key.pem': No such file or directory
+ubuntu@ip-172-31-28-113:~/ansible-lab$ find ~ -name "ansible-key.pem"
+/home/ubuntu/ansible-key.pem
+ubuntu@ip-172-31-28-113:~/ansible-lab$ ssh -i /home/ubuntu/ansible-key.pem ubuntu@54.160.239.239
+Welcome to Ubuntu 22.04.3 LTS (GNU/Linux 6.2.0-1014-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Sat May  3 00:02:17 UTC 2025
+
+  System load:  0.0               Processes:             100
+  Usage of /:   20.8% of 7.57GB   Users logged in:       0
+  Memory usage: 21%               IPv4 address for eth0: 172.31.29.186
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+New release '24.04.2 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Sat May  3 00:00:28 2025 from 54.90.120.12
+ubuntu@ip-172-31-29-186:~$ ssh -i ansible-key.pem ubuntu@54.160.239.239
+Warning: Identity file ansible-key.pem not accessible: No such file or directory.
+The authenticity of host '54.160.239.239 (54.160.239.239)' can't be established.
+ED25519 key fingerprint is SHA256:YHoMIdjGgGpTOO8uIaVkIvOM8CNXjY+uyTwcC0Upllo.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '54.160.239.239' (ED25519) to the list of known hosts.
+ubuntu@54.160.239.239: Permission denied (publickey).
+ubuntu@ip-172-31-29-186:~$ ssh -i /home/ubuntu/ansible-key.pem ubuntu@54.160.239.239
+Warning: Identity file /home/ubuntu/ansible-key.pem not accessible: No such file or directory.
+ubuntu@54.160.239.239: Permission denied (publickey).
+ubuntu@ip-172-31-29-186:~$ cat /tmp/archivo_ansible.txt
+Archivo creado por Ansible con éxito ✔️ubuntu@ip-172-31-29-186:~$ 
+

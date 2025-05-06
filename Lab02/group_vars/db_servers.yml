@@ -1,0 +1,5 @@
+---
+# Variables específicas para servidores DB
+db_packages:
+  - mysql-server
+  - python3-mysqldb

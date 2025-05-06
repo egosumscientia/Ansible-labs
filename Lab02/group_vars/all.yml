@@ -1,0 +1,4 @@
+---
+# Variables comunes a todos los hosts
+ansible_connection: ssh
+ansible_ssh_common_args: '-o StrictHostKeyChecking=no'

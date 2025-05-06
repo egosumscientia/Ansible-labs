@@ -1,0 +1,31 @@
+---
+- hosts: all
+  tasks:
+    - name: Crear directorio de prueba
+      file:
+        path: /tmp/ansible_test
+        state: directory
+        mode: '0755'
+
+    - name: Crear archivo de prueba
+      copy:
+        content: "¡Laboratorio funcionando en {{ inventory_hostname }}!"
+        dest: /tmp/ansible_test/status.txt
+
+- hosts: web_servers
+  tasks:
+    - name: Verificar servicio Nginx
+      service:
+        name: nginx
+        enabled: yes
+        state: started
+
+- hosts: db_servers
+  tasks:
+    - name: Instalar herramientas MySQL
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - mysql-client
+        - python3-mysqldb

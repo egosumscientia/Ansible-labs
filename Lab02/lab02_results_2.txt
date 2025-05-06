@@ -1,0 +1,268 @@
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab02$ ansible-inventory -i inventory/azure_rm.yml --graph
+[WARNING]:  * Failed to parse /home/pauloenrique/Documents/Development/Ansible-labs/Lab02/inventory/azure_rm.yml with auto plugin: Failed to get credentials. Either pass as
+parameters, set environment variables, define a profile in ~/.azure/credentials, or install Azure CLI and log in (`az login`).
+[WARNING]:  * Failed to parse /home/pauloenrique/Documents/Development/Ansible-labs/Lab02/inventory/azure_rm.yml with yaml plugin: Plugin configuration YAML file, not YAML inventory
+[WARNING]:  * Failed to parse /home/pauloenrique/Documents/Development/Ansible-labs/Lab02/inventory/azure_rm.yml with ini plugin: Invalid host pattern 'plugin:' supplied, ending in
+':' is not allowed, this character is reserved to provide a port.
+[WARNING]: Unable to parse /home/pauloenrique/Documents/Development/Ansible-labs/Lab02/inventory/azure_rm.yml as an inventory source
+[WARNING]: No inventory was parsed, only implicit localhost is available
+@all:
+  |--@ungrouped:
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab02$ ANSIBLE_INVENTORY_UNPARSED=true ansible-inventory -i inventory/azure_rm.yml --graph -vvvv
+ansible-inventory [core 2.16.3]
+  config file = /home/pauloenrique/Documents/Development/Ansible-labs/Lab02/ansible.cfg
+  configured module search path = ['/home/pauloenrique/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3/dist-packages/ansible
+  ansible collection location = /home/pauloenrique/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/bin/ansible-inventory
+  python version = 3.12.3 (main, Feb  4 2025, 14:48:35) [GCC 13.3.0] (/usr/bin/python3)
+  jinja version = 3.1.2
+  libyaml = True
+Using /home/pauloenrique/Documents/Development/Ansible-labs/Lab02/ansible.cfg as config file
+setting up inventory plugins
+Loading collection ansible.builtin from 
+host_list declined parsing /home/pauloenrique/Documents/Development/Ansible-labs/Lab02/inventory/azure_rm.yml as it did not pass its verify_file() method
+script declined parsing /home/pauloenrique/Documents/Development/Ansible-labs/Lab02/inventory/azure_rm.yml as it did not pass its verify_file() method
+Loading collection azure.azcollection from /usr/lib/python3/dist-packages/ansible_collections/azure/azcollection
+Using inventory plugin 'ansible_collections.azure.azcollection.plugins.inventory.azure_rm' to process inventory source '/home/pauloenrique/Documents/Development/Ansible-labs/Lab02/inventory/azure_rm.yml'
+toml declined parsing /home/pauloenrique/Documents/Development/Ansible-labs/Lab02/inventory/azure_rm.yml as it did not pass its verify_file() method
+[WARNING]:  * Failed to parse /home/pauloenrique/Documents/Development/Ansible-labs/Lab02/inventory/azure_rm.yml with auto plugin: Failed to get credentials. Either pass as
+parameters, set environment variables, define a profile in ~/.azure/credentials, or install Azure CLI and log in (`az login`).
+  File "/usr/lib/python3/dist-packages/ansible/inventory/manager.py", line 293, in parse_source
+    plugin.parse(self._inventory, self._loader, source, cache=cache)
+  File "/usr/lib/python3/dist-packages/ansible/plugins/inventory/auto.py", line 59, in parse
+    plugin.parse(inventory, loader, path, cache=cache)
+  File "/usr/lib/python3/dist-packages/ansible_collections/azure/azcollection/plugins/inventory/azure_rm.py", line 219, in parse
+    self._credential_setup()
+  File "/usr/lib/python3/dist-packages/ansible_collections/azure/azcollection/plugins/inventory/azure_rm.py", line 241, in _credential_setup
+    self.azure_auth = AzureRMAuth(**auth_options)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/ansible_collections/azure/azcollection/plugins/module_utils/azure_rm_common.py", line 1458, in __init__
+    self.fail("Failed to get credentials. Either pass as parameters, set environment variables, "
+  File "/usr/lib/python3/dist-packages/ansible_collections/azure/azcollection/plugins/module_utils/azure_rm_common.py", line 1593, in fail
+    self._fail_impl(msg)
+  File "/usr/lib/python3/dist-packages/ansible_collections/azure/azcollection/plugins/module_utils/azure_rm_common.py", line 1596, in _default_fail_impl
+    raise AzureRMAuthException(msg)
+[WARNING]:  * Failed to parse /home/pauloenrique/Documents/Development/Ansible-labs/Lab02/inventory/azure_rm.yml with yaml plugin: Plugin configuration YAML file, not YAML inventory
+  File "/usr/lib/python3/dist-packages/ansible/inventory/manager.py", line 293, in parse_source
+    plugin.parse(self._inventory, self._loader, source, cache=cache)
+  File "/usr/lib/python3/dist-packages/ansible/plugins/inventory/yaml.py", line 114, in parse
+    raise AnsibleParserError('Plugin configuration YAML file, not YAML inventory')
+[WARNING]:  * Failed to parse /home/pauloenrique/Documents/Development/Ansible-labs/Lab02/inventory/azure_rm.yml with ini plugin: Invalid host pattern 'plugin:' supplied, ending in
+':' is not allowed, this character is reserved to provide a port.
+  File "/usr/lib/python3/dist-packages/ansible/inventory/manager.py", line 293, in parse_source
+    plugin.parse(self._inventory, self._loader, source, cache=cache)
+  File "/usr/lib/python3/dist-packages/ansible/plugins/inventory/ini.py", line 138, in parse
+    raise AnsibleParserError(e)
+[WARNING]: Unable to parse /home/pauloenrique/Documents/Development/Ansible-labs/Lab02/inventory/azure_rm.yml as an inventory source
+[WARNING]: No inventory was parsed, only implicit localhost is available
+@all:
+  |--@ungrouped:
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab02$ ls -la
+total 48
+drwxrwxr-x 9 pauloenrique pauloenrique 4096 May  6 13:48 .
+drwxrwxr-x 5 pauloenrique pauloenrique 4096 May  6 13:05 ..
+-rw-rw-r-- 1 pauloenrique pauloenrique  222 May  6 13:26 ansible.cfg
+drwxrwxr-x 2 pauloenrique pauloenrique 4096 May  6 13:18 files
+drwxrwxr-x 2 pauloenrique pauloenrique 4096 May  6 13:18 group_vars
+drwxrwxr-x 2 pauloenrique pauloenrique 4096 May  6 13:18 host_vars
+drwxrwxr-x 2 pauloenrique pauloenrique 4096 May  6 13:18 inventory
+-rw-rw-r-- 1 pauloenrique pauloenrique  659 May  6 13:48 playbook.yml
+-rw-rw-r-- 1 pauloenrique pauloenrique 1799 May  6 13:26 README.md
+drwxrwxr-x 2 pauloenrique pauloenrique 4096 May  6 13:25 scripts
+drwxrwxr-x 3 pauloenrique pauloenrique 4096 May  6 13:34 terraform
+drwxrwxr-x 5 pauloenrique pauloenrique 4096 May  6 13:08 .venv
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab02$ ansible-playbook -i inventory/inventory.ini playbook.yml
+
+PLAY [all] *****************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************************************************************
+ok: [vm1]
+ok: [vm0]
+
+TASK [Crear directorio de prueba] ******************************************************************************************************************************************************
+changed: [vm1]
+changed: [vm0]
+
+TASK [Crear archivo de prueba] *********************************************************************************************************************************************************
+changed: [vm0]
+changed: [vm1]
+
+PLAY [web_servers] *********************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************************************************************
+ok: [vm0]
+
+TASK [Verificar servicio Nginx] ********************************************************************************************************************************************************
+ok: [vm0]
+
+PLAY [db_servers] **********************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************************************************************
+ok: [vm1]
+
+TASK [Instalar herramientas MySQL] *****************************************************************************************************************************************************
+ok: [vm1] => (item=mysql-client)
+failed: [vm1] (item=python3-mysqldb) => {"ansible_loop_var": "item", "cache_update_time": 1705395110, "cache_updated": false, "changed": false, "item": "python3-mysqldb", "msg": "'/usr/bin/apt-get -y -o \"Dpkg::Options::=--force-confdef\" -o \"Dpkg::Options::=--force-confold\"       install 'python3-mysqldb=1.3.10-1build1'' failed: E: Could not open lock file /var/lib/dpkg/lock-frontend - open (13: Permission denied)\nE: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), are you root?\n", "rc": 100, "stderr": "E: Could not open lock file /var/lib/dpkg/lock-frontend - open (13: Permission denied)\nE: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), are you root?\n", "stderr_lines": ["E: Could not open lock file /var/lib/dpkg/lock-frontend - open (13: Permission denied)", "E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), are you root?"], "stdout": "", "stdout_lines": []}
+
+PLAY RECAP *****************************************************************************************************************************************************************************
+vm0                        : ok=5    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+vm1                        : ok=4    changed=2    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab02$ ssh adminuser@172.190.22.184
+The authenticity of host '172.190.22.184 (172.190.22.184)' can't be established.
+ED25519 key fingerprint is SHA256:spDxJzm7Cri3ooNZeZQeUjlEpmY5LAgLSE9uWcfFJrg.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '172.190.22.184' (ED25519) to the list of known hosts.
+adminuser@172.190.22.184's password: 
+Welcome to Ubuntu 18.04.6 LTS (GNU/Linux 5.4.0-1109-azure x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue May  6 18:52:52 UTC 2025
+
+  System load:  0.0               Processes:           104
+  Usage of /:   4.9% of 28.89GB   Users logged in:     0
+  Memory usage: 22%               IP address for eth0: 10.0.2.5
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Infrastructure is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Infra to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+New release '20.04.6 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Tue May  6 18:49:34 2025 from 191.92.22.183
+adminuser@vm-1:~$ sudo apt update
+Hit:1 http://azure.archive.ubuntu.com/ubuntu bionic InRelease
+Get:2 http://azure.archive.ubuntu.com/ubuntu bionic-updates InRelease [102 kB]
+Get:3 http://azure.archive.ubuntu.com/ubuntu bionic-backports InRelease [102 kB]
+Get:4 http://azure.archive.ubuntu.com/ubuntu bionic-security InRelease [102 kB]
+Get:5 http://azure.archive.ubuntu.com/ubuntu bionic/universe amd64 Packages [8570 kB]
+Get:6 http://azure.archive.ubuntu.com/ubuntu bionic/universe Translation-en [4941 kB]
+Get:7 http://azure.archive.ubuntu.com/ubuntu bionic/multiverse amd64 Packages [151 kB]   
+Get:8 http://azure.archive.ubuntu.com/ubuntu bionic/multiverse Translation-en [108 kB]
+Get:9 http://azure.archive.ubuntu.com/ubuntu bionic-updates/main amd64 Packages [3044 kB]
+Get:10 http://azure.archive.ubuntu.com/ubuntu bionic-updates/main Translation-en [554 kB]
+Get:11 http://azure.archive.ubuntu.com/ubuntu bionic-updates/universe amd64 Packages [1914 kB]
+Get:12 http://azure.archive.ubuntu.com/ubuntu bionic-updates/universe Translation-en [421 kB]
+Get:13 http://azure.archive.ubuntu.com/ubuntu bionic-updates/multiverse amd64 Packages [25.6 kB]
+Get:14 http://azure.archive.ubuntu.com/ubuntu bionic-updates/multiverse Translation-en [6088 B]
+Get:15 http://azure.archive.ubuntu.com/ubuntu bionic-backports/main amd64 Packages [53.3 kB]
+Get:16 http://azure.archive.ubuntu.com/ubuntu bionic-backports/main Translation-en [14.6 kB]
+Get:17 http://azure.archive.ubuntu.com/ubuntu bionic-backports/universe amd64 Packages [18.2 kB]
+Get:18 http://azure.archive.ubuntu.com/ubuntu bionic-backports/universe Translation-en [8668 B]
+Get:19 http://azure.archive.ubuntu.com/ubuntu bionic-security/main amd64 Packages [2717 kB]
+Get:20 http://azure.archive.ubuntu.com/ubuntu bionic-security/main Translation-en [468 kB]
+Get:21 http://azure.archive.ubuntu.com/ubuntu bionic-security/universe amd64 Packages [1303 kB]
+Get:22 http://azure.archive.ubuntu.com/ubuntu bionic-security/universe Translation-en [308 kB]
+Get:23 http://azure.archive.ubuntu.com/ubuntu bionic-security/multiverse amd64 Packages [19.8 kB]
+Get:24 http://azure.archive.ubuntu.com/ubuntu bionic-security/multiverse Translation-en [3928 B]
+Fetched 25.0 MB in 7s (3334 kB/s)                                                                                                                                                      
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+10 packages can be upgraded. Run 'apt list --upgradable' to see them.
+adminuser@vm-1:~$ sudo apt install python3-mysqldb -y
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+
+The following additional packages will be installed:
+  libmysqlclient20
+Suggested packages:
+  default-mysql-server | virtual-mysql-server python-egenix-mxdatetime python3-mysqldb-dbg
+The following NEW packages will be installed:
+  libmysqlclient20 python3-mysqldb
+0 upgraded, 2 newly installed, 0 to remove and 10 not upgraded.
+Need to get 776 kB of archives.
+After this operation, 4269 kB of additional disk space will be used.
+Get:1 http://azure.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libmysqlclient20 amd64 5.7.42-0ubuntu0.18.04.1 [730 kB]
+Get:2 http://azure.archive.ubuntu.com/ubuntu bionic/main amd64 python3-mysqldb amd64 1.3.10-1build1 [46.0 kB]
+Fetched 776 kB in 0s (10.4 MB/s)      
+Selecting previously unselected package libmysqlclient20:amd64.
+(Reading database ... 59259 files and directories currently installed.)
+Preparing to unpack .../libmysqlclient20_5.7.42-0ubuntu0.18.04.1_amd64.deb ...
+Unpacking libmysqlclient20:amd64 (5.7.42-0ubuntu0.18.04.1) ...
+Selecting previously unselected package python3-mysqldb.
+Preparing to unpack .../python3-mysqldb_1.3.10-1build1_amd64.deb ...
+Unpacking python3-mysqldb (1.3.10-1build1) ...
+Setting up libmysqlclient20:amd64 (5.7.42-0ubuntu0.18.04.1) ...
+Setting up python3-mysqldb (1.3.10-1build1) ...
+Processing triggers for libc-bin (2.27-3ubuntu1.6) ...
+adminuser@vm-1:~$ sudo apt install python3-mysqldb -y
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+python3-mysqldb is already the newest version (1.3.10-1build1).
+0 upgraded, 0 newly installed, 0 to remove and 10 not upgraded.
+adminuser@vm-1:~$ ansible db_servers -i inventory/inventory.ini -b -m user -a "name=adminuser groups=sudo append=yes"
+
+Command 'ansible' not found, but can be installed with:
+
+sudo apt install ansible
+
+adminuser@vm-1:~$ sudo su -
+root@vm-1:~# echo "adminuser ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/adminuser
+root@vm-1:~# chmod 440 /etc/sudoers.d/adminuser
+root@vm-1:~# exit
+logout
+adminuser@vm-1:~$ exit
+logout
+Connection to 172.190.22.184 closed.
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab02$ ansible-playbook -i inventory/inventory.ini playbook.yml
+
+PLAY [all] *****************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************************************************************
+ok: [vm0]
+ok: [vm1]
+
+TASK [Crear directorio de prueba] ******************************************************************************************************************************************************
+ok: [vm0]
+ok: [vm1]
+
+TASK [Crear archivo de prueba] *********************************************************************************************************************************************************
+ok: [vm1]
+ok: [vm0]
+
+PLAY [web_servers] *********************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************************************************************
+ok: [vm0]
+
+TASK [Verificar servicio Nginx] ********************************************************************************************************************************************************
+ok: [vm0]
+
+PLAY [db_servers] **********************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************************************************************
+ok: [vm1]
+
+TASK [Instalar herramientas MySQL] *****************************************************************************************************************************************************
+ok: [vm1] => (item=mysql-client)
+ok: [vm1] => (item=python3-mysqldb)
+
+PLAY RECAP *****************************************************************************************************************************************************************************
+vm0                        : ok=5    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+vm1                        : ok=5    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab02$ ansible db_servers -i inventory/inventory.ini -m shell -a "dpkg -l | grep mysql"
+vm1 | CHANGED | rc=0 >>
+ii  libmysqlclient20:amd64                 5.7.42-0ubuntu0.18.04.1             amd64        MySQL database client library
+ii  mysql-client                           5.7.42-0ubuntu0.18.04.1             all          MySQL database client (metapackage depending on the latest version)
+ii  mysql-client-5.7                       5.7.42-0ubuntu0.18.04.1             amd64        MySQL database client binaries
+ii  mysql-client-core-5.7                  5.7.42-0ubuntu0.18.04.1             amd64        MySQL database core client binaries
+ii  mysql-common                           5.8+1.0.4                           all          MySQL database common files, e.g. /etc/mysql/my.cnf
+ii  python3-mysqldb                        1.3.10-1build1                      amd64        Python interface to MySQL
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab02$ 
+

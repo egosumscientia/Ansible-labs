@@ -1,0 +1,16 @@
+plugin: azure.azcollection.azure_rm
+auth_source: auto
+
+include_vm_resource_groups:
+  - ansible-lab-rg
+
+keyed_groups:
+  - prefix: tag
+    key: tags
+  - prefix: location
+    key: location
+
+hostvar_expressions:
+  ansible_host: public_ipv4_addresses[0] || private_ipv4_addresses[0]
+  ansible_user: "adminuser"
+  ansible_password: "P@ssw0rd1234!"

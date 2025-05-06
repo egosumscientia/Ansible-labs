@@ -1,0 +1,6 @@
+---
+# Variables específicas para servidores web
+web_packages:
+  - nginx
+  - curl
+  - git

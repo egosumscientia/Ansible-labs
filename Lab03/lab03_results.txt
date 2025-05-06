@@ -1,0 +1,852 @@
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs$ nano lab03_setup.sh
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs$ ls -la
+total 68
+drwxrwxr-x  5 pauloenrique pauloenrique  4096 May  6 14:13 .
+drwxrwxr-x 11 pauloenrique pauloenrique  4096 May  2 18:42 ..
+-rw-rw-r--  1 pauloenrique pauloenrique 33654 May  6 14:07 Ansible-labs.odt
+drwxrwxr-x  8 pauloenrique pauloenrique  4096 May  6 14:03 .git
+-rw-rw-r--  1 pauloenrique pauloenrique   814 May  6 13:06 .gitignore
+drwxrwxr-x  2 pauloenrique pauloenrique  4096 May  2 19:06 Lab01
+drwxrwxr-x  9 pauloenrique pauloenrique  4096 May  6 14:04 Lab02
+-rw-rw-r--  1 pauloenrique pauloenrique   728 May  6 14:13 lab03_setup.sh
+-rw-rw-r--  1 pauloenrique pauloenrique   107 May  6 14:07 .~lock.Ansible-labs.odt#
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs$ chmod +x lab03_setup.sh 
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs$ ./lab03_setup.sh 
+Estructura de proyecto creada exitosamente.
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs$ cd Lab03
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03$ tree .
+.
+├── ansible
+│   ├── group_vars
+│   │   └── all.yml
+│   ├── inventory.ini
+│   ├── playbook.yml
+│   └── roles
+│       └── system_info
+│           ├── handlers
+│           │   └── main.yml
+│           ├── tasks
+│           │   └── main.yml
+│           └── templates
+│               └── info.j2
+├── README.md
+└── terraform
+    ├── main.tf
+    ├── outputs.tf
+    └── variables.tf
+
+9 directories, 10 files
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03$ az account show
+{
+  "environmentName": "AzureCloud",
+  "homeTenantId": "093c684c-622c-4a8c-9180-47802a4d322a",
+  "id": "5f55b5a1-09ef-4b87-b02d-30e1a8347b3d",
+  "isDefault": true,
+  "managedByTenants": [],
+  "name": "Suscripción de Azure 1",
+  "state": "Enabled",
+  "tenantDefaultDomain": "petorovalderhotmail.onmicrosoft.com",
+  "tenantDisplayName": "Directorio predeterminado",
+  "tenantId": "093c684c-622c-4a8c-9180-47802a4d322a",
+  "user": {
+    "name": "petorovalder@hotmail.com",
+    "type": "user"
+  }
+}
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03$ cd terraform/
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/terraform$ terraform fmt
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/terraform$ terraform init
+Initializing the backend...
+╷
+│ Error: Terraform encountered problems during initialisation, including problems
+│ with the configuration, described below.
+│ 
+│ The Terraform configuration must be valid before initialization so that
+│ Terraform can determine which modules and providers need to be installed.
+│ 
+│ 
+╵
+╷
+│ Error: Duplicate output definition
+│ 
+│   on outputs.tf line 1:
+│    1: output "vm_public_ip" {
+│ 
+│ An output named "vm_public_ip" was already defined at main.tf:82,1-22. Output names must be unique within a module.
+╵
+╷
+│ Error: Duplicate output definition
+│ 
+│   on outputs.tf line 1:
+│    1: output "vm_public_ip" {
+│ 
+│ An output named "vm_public_ip" was already defined at main.tf:82,1-22. Output names must be unique within a module.
+╵
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/terraform$ terraform init
+Initializing the backend...
+Initializing provider plugins...
+- Finding hashicorp/azurerm versions matching "~> 3.0"...
+- Installing hashicorp/azurerm v3.117.1...
+- Installed hashicorp/azurerm v3.117.1 (signed by HashiCorp)
+Terraform has created a lock file .terraform.lock.hcl to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/terraform$ terraform plan
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # azurerm_linux_virtual_machine.lab will be created
+  + resource "azurerm_linux_virtual_machine" "lab" {
+      + admin_username                                         = "adminuser"
+      + allow_extension_operations                             = true
+      + bypass_platform_safety_checks_on_user_schedule_enabled = false
+      + computer_name                                          = (known after apply)
+      + disable_password_authentication                        = true
+      + disk_controller_type                                   = (known after apply)
+      + extensions_time_budget                                 = "PT1H30M"
+      + id                                                     = (known after apply)
+      + location                                               = "eastus"
+      + max_bid_price                                          = -1
+      + name                                                   = "lab-vm"
+      + network_interface_ids                                  = (known after apply)
+      + patch_assessment_mode                                  = "ImageDefault"
+      + patch_mode                                             = "ImageDefault"
+      + platform_fault_domain                                  = -1
+      + priority                                               = "Regular"
+      + private_ip_address                                     = (known after apply)
+      + private_ip_addresses                                   = (known after apply)
+      + provision_vm_agent                                     = true
+      + public_ip_address                                      = (known after apply)
+      + public_ip_addresses                                    = (known after apply)
+      + resource_group_name                                    = "lab3-ansible-variables"
+      + size                                                   = "Standard_B1s"
+      + virtual_machine_id                                     = (known after apply)
+      + vm_agent_platform_updates_enabled                      = false
+
+      + admin_ssh_key {
+          + public_key = <<-EOT
+                ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDHWxXbOHJPS4MfRM0nd0phOT4FjqA44Ej5Cjya/DLy/Tp2LvO59hqfRJjEDd4zHG//vO/a3istk8kV9eK7tuHVVnmaHD3TGfdzwKJ+78mwVxQ+V+xHmYc8JtFBJpTjBWDN+6P6BsC51IxXns6l7GWERGFBFC9sS2/H376dmGCZt8fx00LKImefvXL/tJGxMz5dxhVkgVIc7NuiqnwbBB5mYJEvWvpGB9at+9G2ivNbHMVZO1sqPirw737/LE+KFquorYDnKou0oWxSaOq4p+pOLxw7X67Ib8Dy4dxm44ChhAwMa5WBBmqvoHpPlqVk3mHrj9S5eLTsI3ZZCvhKzvCV53z6QVCA+hIeige2AMXDN4xZ3Eq1mJz9ktslQZ+Ofz5YChNYqIRqthEpnZOY5Y0Zewcaemp3S3cfxfoT26sHX0QprURJcLWL1m0crBrT2aZTc1SnnIkp+RIUXMuKcTwLcr3KKNlJOjEBQ84qmdq2JV8S1+V5+UE8S3a6P0JHKEKsDzPQKNAvzkECK+ikYNP334Sse+HANNs5eiJDXchGpxShskm9UGVq1fo2T6P9w8FAWaCGm1spbmiOu40K2LeiKyggKACki59at0Jdu3eYDTd/YmUE8Y0XCGFyzh1sVTvMPYvoyJqBJi3T7sg7q/RoPbD4wmEUeiyvp8y+PuaBUQ== petorovalder@hotmail.com
+            EOT
+          + username   = "adminuser"
+        }
+
+      + os_disk {
+          + caching                   = "ReadWrite"
+          + disk_size_gb              = (known after apply)
+          + name                      = (known after apply)
+          + storage_account_type      = "Standard_LRS"
+          + write_accelerator_enabled = false
+        }
+
+      + source_image_reference {
+          + offer     = "UbuntuServer"
+          + publisher = "Canonical"
+          + sku       = "18.04-LTS"
+          + version   = "latest"
+        }
+
+      + termination_notification (known after apply)
+    }
+
+  # azurerm_network_interface.lab will be created
+  + resource "azurerm_network_interface" "lab" {
+      + accelerated_networking_enabled = (known after apply)
+      + applied_dns_servers            = (known after apply)
+      + dns_servers                    = (known after apply)
+      + enable_accelerated_networking  = (known after apply)
+      + enable_ip_forwarding           = (known after apply)
+      + id                             = (known after apply)
+      + internal_domain_name_suffix    = (known after apply)
+      + ip_forwarding_enabled          = (known after apply)
+      + location                       = "eastus"
+      + mac_address                    = (known after apply)
+      + name                           = "lab-nic"
+      + private_ip_address             = (known after apply)
+      + private_ip_addresses           = (known after apply)
+      + resource_group_name            = "lab3-ansible-variables"
+      + virtual_machine_id             = (known after apply)
+
+      + ip_configuration {
+          + gateway_load_balancer_frontend_ip_configuration_id = (known after apply)
+          + name                                               = "internal"
+          + primary                                            = (known after apply)
+          + private_ip_address                                 = (known after apply)
+          + private_ip_address_allocation                      = "Dynamic"
+          + private_ip_address_version                         = "IPv4"
+          + public_ip_address_id                               = (known after apply)
+          + subnet_id                                          = (known after apply)
+        }
+    }
+
+  # azurerm_public_ip.lab will be created
+  + resource "azurerm_public_ip" "lab" {
+      + allocation_method       = "Dynamic"
+      + ddos_protection_mode    = "VirtualNetworkInherited"
+      + fqdn                    = (known after apply)
+      + id                      = (known after apply)
+      + idle_timeout_in_minutes = 4
+      + ip_address              = (known after apply)
+      + ip_version              = "IPv4"
+      + location                = "eastus"
+      + name                    = "lab-public-ip"
+      + resource_group_name     = "lab3-ansible-variables"
+      + sku                     = "Basic"
+      + sku_tier                = "Regional"
+    }
+
+  # azurerm_resource_group.lab will be created
+  + resource "azurerm_resource_group" "lab" {
+      + id       = (known after apply)
+      + location = "eastus"
+      + name     = "lab3-ansible-variables"
+    }
+
+  # azurerm_subnet.lab will be created
+  + resource "azurerm_subnet" "lab" {
+      + address_prefixes                               = [
+          + "10.0.2.0/24",
+        ]
+      + default_outbound_access_enabled                = true
+      + enforce_private_link_endpoint_network_policies = (known after apply)
+      + enforce_private_link_service_network_policies  = (known after apply)
+      + id                                             = (known after apply)
+      + name                                           = "internal"
+      + private_endpoint_network_policies              = (known after apply)
+      + private_endpoint_network_policies_enabled      = (known after apply)
+      + private_link_service_network_policies_enabled  = (known after apply)
+      + resource_group_name                            = "lab3-ansible-variables"
+      + virtual_network_name                           = "lab-network"
+    }
+
+  # azurerm_virtual_network.lab will be created
+  + resource "azurerm_virtual_network" "lab" {
+      + address_space       = [
+          + "10.0.0.0/16",
+        ]
+      + dns_servers         = (known after apply)
+      + guid                = (known after apply)
+      + id                  = (known after apply)
+      + location            = "eastus"
+      + name                = "lab-network"
+      + resource_group_name = "lab3-ansible-variables"
+      + subnet              = (known after apply)
+    }
+
+Plan: 6 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + vm_public_ip = (known after apply)
+
+───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/terraform$ terraform apply -auto-approve
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # azurerm_linux_virtual_machine.lab will be created
+  + resource "azurerm_linux_virtual_machine" "lab" {
+      + admin_username                                         = "adminuser"
+      + allow_extension_operations                             = true
+      + bypass_platform_safety_checks_on_user_schedule_enabled = false
+      + computer_name                                          = (known after apply)
+      + disable_password_authentication                        = true
+      + disk_controller_type                                   = (known after apply)
+      + extensions_time_budget                                 = "PT1H30M"
+      + id                                                     = (known after apply)
+      + location                                               = "eastus"
+      + max_bid_price                                          = -1
+      + name                                                   = "lab-vm"
+      + network_interface_ids                                  = (known after apply)
+      + patch_assessment_mode                                  = "ImageDefault"
+      + patch_mode                                             = "ImageDefault"
+      + platform_fault_domain                                  = -1
+      + priority                                               = "Regular"
+      + private_ip_address                                     = (known after apply)
+      + private_ip_addresses                                   = (known after apply)
+      + provision_vm_agent                                     = true
+      + public_ip_address                                      = (known after apply)
+      + public_ip_addresses                                    = (known after apply)
+      + resource_group_name                                    = "lab3-ansible-variables"
+      + size                                                   = "Standard_B1s"
+      + virtual_machine_id                                     = (known after apply)
+      + vm_agent_platform_updates_enabled                      = false
+
+      + admin_ssh_key {
+          + public_key = <<-EOT
+                ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDHWxXbOHJPS4MfRM0nd0phOT4FjqA44Ej5Cjya/DLy/Tp2LvO59hqfRJjEDd4zHG//vO/a3istk8kV9eK7tuHVVnmaHD3TGfdzwKJ+78mwVxQ+V+xHmYc8JtFBJpTjBWDN+6P6BsC51IxXns6l7GWERGFBFC9sS2/H376dmGCZt8fx00LKImefvXL/tJGxMz5dxhVkgVIc7NuiqnwbBB5mYJEvWvpGB9at+9G2ivNbHMVZO1sqPirw737/LE+KFquorYDnKou0oWxSaOq4p+pOLxw7X67Ib8Dy4dxm44ChhAwMa5WBBmqvoHpPlqVk3mHrj9S5eLTsI3ZZCvhKzvCV53z6QVCA+hIeige2AMXDN4xZ3Eq1mJz9ktslQZ+Ofz5YChNYqIRqthEpnZOY5Y0Zewcaemp3S3cfxfoT26sHX0QprURJcLWL1m0crBrT2aZTc1SnnIkp+RIUXMuKcTwLcr3KKNlJOjEBQ84qmdq2JV8S1+V5+UE8S3a6P0JHKEKsDzPQKNAvzkECK+ikYNP334Sse+HANNs5eiJDXchGpxShskm9UGVq1fo2T6P9w8FAWaCGm1spbmiOu40K2LeiKyggKACki59at0Jdu3eYDTd/YmUE8Y0XCGFyzh1sVTvMPYvoyJqBJi3T7sg7q/RoPbD4wmEUeiyvp8y+PuaBUQ== petorovalder@hotmail.com
+            EOT
+          + username   = "adminuser"
+        }
+
+      + os_disk {
+          + caching                   = "ReadWrite"
+          + disk_size_gb              = (known after apply)
+          + name                      = (known after apply)
+          + storage_account_type      = "Standard_LRS"
+          + write_accelerator_enabled = false
+        }
+
+      + source_image_reference {
+          + offer     = "UbuntuServer"
+          + publisher = "Canonical"
+          + sku       = "18.04-LTS"
+          + version   = "latest"
+        }
+
+      + termination_notification (known after apply)
+    }
+
+  # azurerm_network_interface.lab will be created
+  + resource "azurerm_network_interface" "lab" {
+      + accelerated_networking_enabled = (known after apply)
+      + applied_dns_servers            = (known after apply)
+      + dns_servers                    = (known after apply)
+      + enable_accelerated_networking  = (known after apply)
+      + enable_ip_forwarding           = (known after apply)
+      + id                             = (known after apply)
+      + internal_domain_name_suffix    = (known after apply)
+      + ip_forwarding_enabled          = (known after apply)
+      + location                       = "eastus"
+      + mac_address                    = (known after apply)
+      + name                           = "lab-nic"
+      + private_ip_address             = (known after apply)
+      + private_ip_addresses           = (known after apply)
+      + resource_group_name            = "lab3-ansible-variables"
+      + virtual_machine_id             = (known after apply)
+
+      + ip_configuration {
+          + gateway_load_balancer_frontend_ip_configuration_id = (known after apply)
+          + name                                               = "internal"
+          + primary                                            = (known after apply)
+          + private_ip_address                                 = (known after apply)
+          + private_ip_address_allocation                      = "Dynamic"
+          + private_ip_address_version                         = "IPv4"
+          + public_ip_address_id                               = (known after apply)
+          + subnet_id                                          = (known after apply)
+        }
+    }
+
+  # azurerm_public_ip.lab will be created
+  + resource "azurerm_public_ip" "lab" {
+      + allocation_method       = "Dynamic"
+      + ddos_protection_mode    = "VirtualNetworkInherited"
+      + fqdn                    = (known after apply)
+      + id                      = (known after apply)
+      + idle_timeout_in_minutes = 4
+      + ip_address              = (known after apply)
+      + ip_version              = "IPv4"
+      + location                = "eastus"
+      + name                    = "lab-public-ip"
+      + resource_group_name     = "lab3-ansible-variables"
+      + sku                     = "Basic"
+      + sku_tier                = "Regional"
+    }
+
+  # azurerm_resource_group.lab will be created
+  + resource "azurerm_resource_group" "lab" {
+      + id       = (known after apply)
+      + location = "eastus"
+      + name     = "lab3-ansible-variables"
+    }
+
+  # azurerm_subnet.lab will be created
+  + resource "azurerm_subnet" "lab" {
+      + address_prefixes                               = [
+          + "10.0.2.0/24",
+        ]
+      + default_outbound_access_enabled                = true
+      + enforce_private_link_endpoint_network_policies = (known after apply)
+      + enforce_private_link_service_network_policies  = (known after apply)
+      + id                                             = (known after apply)
+      + name                                           = "internal"
+      + private_endpoint_network_policies              = (known after apply)
+      + private_endpoint_network_policies_enabled      = (known after apply)
+      + private_link_service_network_policies_enabled  = (known after apply)
+      + resource_group_name                            = "lab3-ansible-variables"
+      + virtual_network_name                           = "lab-network"
+    }
+
+  # azurerm_virtual_network.lab will be created
+  + resource "azurerm_virtual_network" "lab" {
+      + address_space       = [
+          + "10.0.0.0/16",
+        ]
+      + dns_servers         = (known after apply)
+      + guid                = (known after apply)
+      + id                  = (known after apply)
+      + location            = "eastus"
+      + name                = "lab-network"
+      + resource_group_name = "lab3-ansible-variables"
+      + subnet              = (known after apply)
+    }
+
+Plan: 6 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + vm_public_ip = (known after apply)
+azurerm_resource_group.lab: Creating...
+azurerm_resource_group.lab: Still creating... [10s elapsed]
+azurerm_resource_group.lab: Creation complete after 16s [id=/subscriptions/5f55b5a1-09ef-4b87-b02d-30e1a8347b3d/resourceGroups/lab3-ansible-variables]
+azurerm_virtual_network.lab: Creating...
+azurerm_public_ip.lab: Creating...
+azurerm_public_ip.lab: Creation complete after 6s [id=/subscriptions/5f55b5a1-09ef-4b87-b02d-30e1a8347b3d/resourceGroups/lab3-ansible-variables/providers/Microsoft.Network/publicIPAddresses/lab-public-ip]
+azurerm_virtual_network.lab: Still creating... [10s elapsed]
+azurerm_virtual_network.lab: Creation complete after 12s [id=/subscriptions/5f55b5a1-09ef-4b87-b02d-30e1a8347b3d/resourceGroups/lab3-ansible-variables/providers/Microsoft.Network/virtualNetworks/lab-network]
+azurerm_subnet.lab: Creating...
+azurerm_subnet.lab: Still creating... [10s elapsed]
+azurerm_subnet.lab: Creation complete after 10s [id=/subscriptions/5f55b5a1-09ef-4b87-b02d-30e1a8347b3d/resourceGroups/lab3-ansible-variables/providers/Microsoft.Network/virtualNetworks/lab-network/subnets/internal]
+azurerm_network_interface.lab: Creating...
+azurerm_network_interface.lab: Still creating... [10s elapsed]
+azurerm_network_interface.lab: Creation complete after 16s [id=/subscriptions/5f55b5a1-09ef-4b87-b02d-30e1a8347b3d/resourceGroups/lab3-ansible-variables/providers/Microsoft.Network/networkInterfaces/lab-nic]
+azurerm_linux_virtual_machine.lab: Creating...
+azurerm_linux_virtual_machine.lab: Still creating... [10s elapsed]
+azurerm_linux_virtual_machine.lab: Still creating... [20s elapsed]
+azurerm_linux_virtual_machine.lab: Creation complete after 26s [id=/subscriptions/5f55b5a1-09ef-4b87-b02d-30e1a8347b3d/resourceGroups/lab3-ansible-variables/providers/Microsoft.Compute/virtualMachines/lab-vm]
+
+Apply complete! Resources: 6 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+vm_public_ip = ""
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/terraform$ az vm list-ip-addresses --name lab-vm --resource-group lab3-ansible-variables --query "[].virtualMachine.network.publicIpAddresses[0].ipAddress" --output tsv
+4.236.131.93
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/terraform$ cd ../ansible
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/ansible$ export VM_PUBLIC_IP=$(terraform -chdir=../terraform output -raw vm_public_ip)
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/ansible$ ansible-playbook -i inventory.ini playbook.yml
+
+PLAY [Laboratorio de Variables y Facts] ************************************************************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************************************************************
+fatal: [lab-vm]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: hostname contains invalid characters", "unreachable": true}
+
+PLAY RECAP *****************************************************************************************************************************************************************************
+lab-vm                     : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/ansible$ 
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/ansible$ 
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/ansible$ export VM_PUBLIC_IP="4.236.131.93"
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/ansible$ echo $VM_PUBLIC_IP
+4.236.131.93
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/ansible$ nano inventory.ini
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/ansible$ nano inventory.ini
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/ansible$ ssh -i ~/.ssh/id_rsa adminuser@4.236.131.93
+The authenticity of host '4.236.131.93 (4.236.131.93)' can't be established.
+ED25519 key fingerprint is SHA256:+b7RxILewTnXP4ukP4O2RCaGqv3x0ZdbM5vs2v+a3jA.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '4.236.131.93' (ED25519) to the list of known hosts.
+Welcome to Ubuntu 18.04.6 LTS (GNU/Linux 5.4.0-1109-azure x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue May  6 22:41:36 UTC 2025
+
+  System load:  0.01              Processes:           107
+  Usage of /:   4.5% of 28.89GB   Users logged in:     0
+  Memory usage: 20%               IP address for eth0: 10.0.2.4
+  Swap usage:   0%
+
+Expanded Security Maintenance for Infrastructure is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Infra to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+adminuser@lab-vm:~$ exit
+logout
+Connection to 4.236.131.93 closed.
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/ansible$ ansible -i inventory.ini azure_vms --list-hosts
+  hosts (1):
+    lab-vm
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/ansible$ ansible -i inventory.ini azure_vms -m ping -vvv
+ansible [core 2.16.3]
+  config file = None
+  configured module search path = ['/home/pauloenrique/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3/dist-packages/ansible
+  ansible collection location = /home/pauloenrique/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/bin/ansible
+  python version = 3.12.3 (main, Feb  4 2025, 14:48:35) [GCC 13.3.0] (/usr/bin/python3)
+  jinja version = 3.1.2
+  libyaml = True
+No config file found; using defaults
+host_list declined parsing /home/pauloenrique/Documents/Development/Ansible-labs/Lab03/ansible/inventory.ini as it did not pass its verify_file() method
+script declined parsing /home/pauloenrique/Documents/Development/Ansible-labs/Lab03/ansible/inventory.ini as it did not pass its verify_file() method
+auto declined parsing /home/pauloenrique/Documents/Development/Ansible-labs/Lab03/ansible/inventory.ini as it did not pass its verify_file() method
+yaml declined parsing /home/pauloenrique/Documents/Development/Ansible-labs/Lab03/ansible/inventory.ini as it did not pass its verify_file() method
+Parsed /home/pauloenrique/Documents/Development/Ansible-labs/Lab03/ansible/inventory.ini inventory source with ini plugin
+Skipping callback 'default', as we already have a stdout callback.
+Skipping callback 'minimal', as we already have a stdout callback.
+Skipping callback 'oneline', as we already have a stdout callback.
+<4.236.131.93> ESTABLISH SSH CONNECTION FOR USER: adminuser
+<4.236.131.93> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o 'IdentityFile="/home/pauloenrique/.ssh/id_rsa"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="adminuser"' -o ConnectTimeout=10 -o 'ControlPath="/home/pauloenrique/.ansible/cp/485e2d3b3c"' 4.236.131.93 '/bin/sh -c '"'"'echo ~adminuser && sleep 0'"'"''
+<4.236.131.93> (0, b'/home/adminuser\n', b'')
+<4.236.131.93> ESTABLISH SSH CONNECTION FOR USER: adminuser
+<4.236.131.93> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o 'IdentityFile="/home/pauloenrique/.ssh/id_rsa"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="adminuser"' -o ConnectTimeout=10 -o 'ControlPath="/home/pauloenrique/.ansible/cp/485e2d3b3c"' 4.236.131.93 '/bin/sh -c '"'"'( umask 77 && mkdir -p "` echo /home/adminuser/.ansible/tmp `"&& mkdir "` echo /home/adminuser/.ansible/tmp/ansible-tmp-1746571447.0002017-139174-185393930715398 `" && echo ansible-tmp-1746571447.0002017-139174-185393930715398="` echo /home/adminuser/.ansible/tmp/ansible-tmp-1746571447.0002017-139174-185393930715398 `" ) && sleep 0'"'"''
+<4.236.131.93> (0, b'ansible-tmp-1746571447.0002017-139174-185393930715398=/home/adminuser/.ansible/tmp/ansible-tmp-1746571447.0002017-139174-185393930715398\n', b'')
+Using module file /usr/lib/python3/dist-packages/ansible/modules/ping.py
+<4.236.131.93> PUT /home/pauloenrique/.ansible/tmp/ansible-local-139162bkhsqo0l/tmp2_nb14bq TO /home/adminuser/.ansible/tmp/ansible-tmp-1746571447.0002017-139174-185393930715398/AnsiballZ_ping.py
+<4.236.131.93> SSH: EXEC sftp -b - -C -o ControlMaster=auto -o ControlPersist=60s -o 'IdentityFile="/home/pauloenrique/.ssh/id_rsa"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="adminuser"' -o ConnectTimeout=10 -o 'ControlPath="/home/pauloenrique/.ansible/cp/485e2d3b3c"' '[4.236.131.93]'
+<4.236.131.93> (0, b'sftp> put /home/pauloenrique/.ansible/tmp/ansible-local-139162bkhsqo0l/tmp2_nb14bq /home/adminuser/.ansible/tmp/ansible-tmp-1746571447.0002017-139174-185393930715398/AnsiballZ_ping.py\n', b'')
+<4.236.131.93> ESTABLISH SSH CONNECTION FOR USER: adminuser
+<4.236.131.93> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o 'IdentityFile="/home/pauloenrique/.ssh/id_rsa"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="adminuser"' -o ConnectTimeout=10 -o 'ControlPath="/home/pauloenrique/.ansible/cp/485e2d3b3c"' 4.236.131.93 '/bin/sh -c '"'"'chmod u+x /home/adminuser/.ansible/tmp/ansible-tmp-1746571447.0002017-139174-185393930715398/ /home/adminuser/.ansible/tmp/ansible-tmp-1746571447.0002017-139174-185393930715398/AnsiballZ_ping.py && sleep 0'"'"''
+<4.236.131.93> (0, b'', b'')
+<4.236.131.93> ESTABLISH SSH CONNECTION FOR USER: adminuser
+<4.236.131.93> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o 'IdentityFile="/home/pauloenrique/.ssh/id_rsa"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="adminuser"' -o ConnectTimeout=10 -o 'ControlPath="/home/pauloenrique/.ansible/cp/485e2d3b3c"' -tt 4.236.131.93 '/bin/sh -c '"'"'/usr/bin/python3 /home/adminuser/.ansible/tmp/ansible-tmp-1746571447.0002017-139174-185393930715398/AnsiballZ_ping.py && sleep 0'"'"''
+<4.236.131.93> (0, b'\r\n{"ping": "pong", "invocation": {"module_args": {"data": "pong"}}}\r\n', b'Shared connection to 4.236.131.93 closed.\r\n')
+<4.236.131.93> ESTABLISH SSH CONNECTION FOR USER: adminuser
+<4.236.131.93> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o 'IdentityFile="/home/pauloenrique/.ssh/id_rsa"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="adminuser"' -o ConnectTimeout=10 -o 'ControlPath="/home/pauloenrique/.ansible/cp/485e2d3b3c"' 4.236.131.93 '/bin/sh -c '"'"'rm -f -r /home/adminuser/.ansible/tmp/ansible-tmp-1746571447.0002017-139174-185393930715398/ > /dev/null 2>&1 && sleep 0'"'"''
+<4.236.131.93> (0, b'', b'')
+lab-vm | SUCCESS => {
+    "changed": false,
+    "invocation": {
+        "module_args": {
+            "data": "pong"
+        }
+    },
+    "ping": "pong"
+}
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/ansible$ ansible-playbook -i inventory.ini playbook.yml -vv
+ansible-playbook [core 2.16.3]
+  config file = None
+  configured module search path = ['/home/pauloenrique/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3/dist-packages/ansible
+  ansible collection location = /home/pauloenrique/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/bin/ansible-playbook
+  python version = 3.12.3 (main, Feb  4 2025, 14:48:35) [GCC 13.3.0] (/usr/bin/python3)
+  jinja version = 3.1.2
+  libyaml = True
+No config file found; using defaults
+Skipping callback 'default', as we already have a stdout callback.
+Skipping callback 'minimal', as we already have a stdout callback.
+Skipping callback 'oneline', as we already have a stdout callback.
+
+PLAYBOOK: playbook.yml *****************************************************************************************************************************************************************
+1 plays in playbook.yml
+
+PLAY [Laboratorio de Variables y Facts] ************************************************************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************************************************************
+task path: /home/pauloenrique/Documents/Development/Ansible-labs/Lab03/ansible/playbook.yml:2
+ok: [lab-vm]
+
+TASK [system_info : Gather system facts] ***********************************************************************************************************************************************
+task path: /home/pauloenrique/Documents/Development/Ansible-labs/Lab03/ansible/roles/system_info/tasks/main.yml:2
+ok: [lab-vm]
+
+TASK [system_info : Display OS information] ********************************************************************************************************************************************
+task path: /home/pauloenrique/Documents/Development/Ansible-labs/Lab03/ansible/roles/system_info/tasks/main.yml:5
+ok: [lab-vm] => {
+    "msg": "Sistema operativo: Ubuntu 18.04"
+}
+
+TASK [system_info : Display memory information] ****************************************************************************************************************************************
+task path: /home/pauloenrique/Documents/Development/Ansible-labs/Lab03/ansible/roles/system_info/tasks/main.yml:9
+ok: [lab-vm] => {
+    "msg": "Memoria total: 912MB"
+}
+
+TASK [system_info : Create system info file] *******************************************************************************************************************************************
+task path: /home/pauloenrique/Documents/Development/Ansible-labs/Lab03/ansible/roles/system_info/tasks/main.yml:13
+An exception occurred during task execution. To see the full traceback, use -vvv. The error was: ansible.errors.AnsibleUndefinedVariable: 'dict object' has no attribute 'ansible_eth0'. 'dict object' has no attribute 'ansible_eth0'
+fatal: [lab-vm]: FAILED! => {"changed": false, "msg": "AnsibleUndefinedVariable: 'dict object' has no attribute 'ansible_eth0'. 'dict object' has no attribute 'ansible_eth0'"}
+
+PLAY RECAP *****************************************************************************************************************************************************************************
+lab-vm                     : ok=4    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/ansible$ ansible-playbook -i inventory.ini playbook.yml -vv
+ansible-playbook [core 2.16.3]
+  config file = None
+  configured module search path = ['/home/pauloenrique/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3/dist-packages/ansible
+  ansible collection location = /home/pauloenrique/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/bin/ansible-playbook
+  python version = 3.12.3 (main, Feb  4 2025, 14:48:35) [GCC 13.3.0] (/usr/bin/python3)
+  jinja version = 3.1.2
+  libyaml = True
+No config file found; using defaults
+Skipping callback 'default', as we already have a stdout callback.
+Skipping callback 'minimal', as we already have a stdout callback.
+Skipping callback 'oneline', as we already have a stdout callback.
+
+PLAYBOOK: playbook.yml *****************************************************************************************************************************************************************
+1 plays in playbook.yml
+
+PLAY [Laboratorio de Variables y Facts] ************************************************************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************************************************************
+task path: /home/pauloenrique/Documents/Development/Ansible-labs/Lab03/ansible/playbook.yml:2
+ok: [lab-vm]
+
+TASK [system_info : Gather system facts] ***********************************************************************************************************************************************
+task path: /home/pauloenrique/Documents/Development/Ansible-labs/Lab03/ansible/roles/system_info/tasks/main.yml:2
+ok: [lab-vm]
+
+TASK [system_info : Display OS information] ********************************************************************************************************************************************
+task path: /home/pauloenrique/Documents/Development/Ansible-labs/Lab03/ansible/roles/system_info/tasks/main.yml:5
+ok: [lab-vm] => {
+    "msg": "Sistema operativo: Ubuntu 18.04"
+}
+
+TASK [system_info : Display memory information] ****************************************************************************************************************************************
+task path: /home/pauloenrique/Documents/Development/Ansible-labs/Lab03/ansible/roles/system_info/tasks/main.yml:9
+ok: [lab-vm] => {
+    "msg": "Memoria total: 912MB"
+}
+
+TASK [system_info : Create system info file] *******************************************************************************************************************************************
+task path: /home/pauloenrique/Documents/Development/Ansible-labs/Lab03/ansible/roles/system_info/tasks/main.yml:13
+fatal: [lab-vm]: FAILED! => {"changed": false, "checksum": "ce68ef6c6007c5d4e4413b70a504643590861d37", "msg": "Destination /var/log not writable"}
+
+PLAY RECAP *****************************************************************************************************************************************************************************
+lab-vm                     : ok=4    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/ansible$ ansible-playbook -i inventory.ini playbook.yml -vv
+ansible-playbook [core 2.16.3]
+  config file = None
+  configured module search path = ['/home/pauloenrique/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3/dist-packages/ansible
+  ansible collection location = /home/pauloenrique/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/bin/ansible-playbook
+  python version = 3.12.3 (main, Feb  4 2025, 14:48:35) [GCC 13.3.0] (/usr/bin/python3)
+  jinja version = 3.1.2
+  libyaml = True
+No config file found; using defaults
+ERROR! conflicting action statements: template, ansible_become
+
+The error appears to be in '/home/pauloenrique/Documents/Development/Ansible-labs/Lab03/ansible/roles/system_info/tasks/main.yml': line 13, column 3, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+
+- name: Create system info file
+  ^ here
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/ansible$ ansible -i inventory.ini azure_vms -m shell -a "whoami" --become
+lab-vm | CHANGED | rc=0 >>
+root
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/ansible$ ansible-playbook -i inventory.ini playbook.yml -vv
+ansible-playbook [core 2.16.3]
+  config file = None
+  configured module search path = ['/home/pauloenrique/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3/dist-packages/ansible
+  ansible collection location = /home/pauloenrique/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/bin/ansible-playbook
+  python version = 3.12.3 (main, Feb  4 2025, 14:48:35) [GCC 13.3.0] (/usr/bin/python3)
+  jinja version = 3.1.2
+  libyaml = True
+No config file found; using defaults
+Skipping callback 'default', as we already have a stdout callback.
+Skipping callback 'minimal', as we already have a stdout callback.
+Skipping callback 'oneline', as we already have a stdout callback.
+
+PLAYBOOK: playbook.yml *****************************************************************************************************************************************************************
+1 plays in playbook.yml
+
+PLAY [Laboratorio de Variables y Facts] ************************************************************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************************************************************
+task path: /home/pauloenrique/Documents/Development/Ansible-labs/Lab03/ansible/playbook.yml:2
+ok: [lab-vm]
+
+TASK [system_info : Gather system facts] ***********************************************************************************************************************************************
+task path: /home/pauloenrique/Documents/Development/Ansible-labs/Lab03/ansible/roles/system_info/tasks/main.yml:2
+ok: [lab-vm]
+
+TASK [system_info : Display OS information] ********************************************************************************************************************************************
+task path: /home/pauloenrique/Documents/Development/Ansible-labs/Lab03/ansible/roles/system_info/tasks/main.yml:5
+ok: [lab-vm] => {
+    "msg": "Sistema operativo: Ubuntu 18.04"
+}
+
+TASK [system_info : Display memory information] ****************************************************************************************************************************************
+task path: /home/pauloenrique/Documents/Development/Ansible-labs/Lab03/ansible/roles/system_info/tasks/main.yml:9
+ok: [lab-vm] => {
+    "msg": "Memoria total: 912MB"
+}
+
+TASK [system_info : Create system info file] *******************************************************************************************************************************************
+task path: /home/pauloenrique/Documents/Development/Ansible-labs/Lab03/ansible/roles/system_info/tasks/main.yml:13
+Notification for handler restart syslog has been saved.
+changed: [lab-vm] => {"changed": true, "checksum": "ce68ef6c6007c5d4e4413b70a504643590861d37", "dest": "/var/log/system_info.txt", "gid": 0, "group": "root", "md5sum": "f1e61a1ae6c267f61ed43e8cf934b3a6", "mode": "0644", "owner": "root", "size": 299, "src": "/home/adminuser/.ansible/tmp/ansible-tmp-1746571835.8233232-143944-41686998930556/source", "state": "file", "uid": 0}
+
+TASK [system_info : Show custom variable] **********************************************************************************************************************************************
+task path: /home/pauloenrique/Documents/Development/Ansible-labs/Lab03/ansible/roles/system_info/tasks/main.yml:23
+ok: [lab-vm] => {
+    "msg": "Nombre de la compañía: ACME Corp"
+}
+NOTIFIED HANDLER system_info : restart syslog for lab-vm
+
+RUNNING HANDLER [system_info : restart syslog] *****************************************************************************************************************************************
+task path: /home/pauloenrique/Documents/Development/Ansible-labs/Lab03/ansible/roles/system_info/handlers/main.yml:2
+fatal: [lab-vm]: FAILED! => {"changed": false, "msg": "Unable to restart service rsyslog: Failed to restart rsyslog.service: Connection timed out\nSee system logs and 'systemctl status rsyslog.service' for details.\n"}
+
+PLAY RECAP *****************************************************************************************************************************************************************************
+lab-vm                     : ok=6    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/ansible$ ansible-playbook -i inventory.ini playbook.yml
+
+PLAY [Laboratorio de Variables y Facts] ************************************************************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************************************************************
+ok: [lab-vm]
+
+TASK [system_info : Gather system facts] ***********************************************************************************************************************************************
+ok: [lab-vm]
+
+TASK [system_info : Display OS information] ********************************************************************************************************************************************
+ok: [lab-vm] => {
+    "msg": "Sistema operativo: Ubuntu 18.04"
+}
+
+TASK [system_info : Display memory information] ****************************************************************************************************************************************
+ok: [lab-vm] => {
+    "msg": "Memoria total: 912MB"
+}
+
+TASK [system_info : Create system info file] *******************************************************************************************************************************************
+ok: [lab-vm]
+
+TASK [system_info : Show custom variable] **********************************************************************************************************************************************
+ok: [lab-vm] => {
+    "msg": "Nombre de la compañía: ACME Corp"
+}
+
+PLAY RECAP *****************************************************************************************************************************************************************************
+lab-vm                     : ok=6    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/ansible$ ssh -i ~/.ssh/id_rsa adminuser@4.236.131.93 "sudo cat /var/log/system_info.txt"
+System Information Report - 2025-05-06
+
+Hostname: lab-vm
+OS: Ubuntu 18.04
+Architecture: x86_64
+Kernel: 5.4.0-1109-azure
+
+CPU Cores: 1
+Memory: 912 MB
+
+Network Interfaces:
+- eth0:
+    - IPv4: 10.0.2.4
+      - MAC: 7c:1e:52:49:bb:f2
+  - lo:
+    - IPv4: 127.0.0.1
+    
+Environment: []
+Company: ACME Corppauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/ansible$ ssh -i ~/.ssh/id_rsa adminuser@4.236.131.93 "ls -l /var/log/system_info.tssh -i ~/.ssh/id_rsa adminuser@4.236.131.93 "ls -l /var/log/system_info.txt"
+-rw-r--r-- 1 root root 299 May  6 22:50 /var/log/system_info.txt
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/ansible$ terraform state lis
+Usage: terraform [global options] state <subcommand> [options] [args]
+
+  This command has subcommands for advanced state management.
+
+  These subcommands can be used to slice and dice the Terraform state.
+  This is sometimes necessary in advanced cases. For your safety, all
+  state management commands that modify the state create a timestamped
+  backup of the state prior to making modifications.
+
+  The structure and output of the commands is specifically tailored to work
+  well with the common Unix utilities such as grep, awk, etc. We recommend
+  using those tools to perform more advanced state tasks.
+
+Subcommands:
+    list                List resources in the state
+    mv                  Move an item in the state
+    pull                Pull current state and output to stdout
+    push                Update remote state from a local state file
+    replace-provider    Replace provider in the state
+    rm                  Remove instances from the state
+    show                Show a resource in the state
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/ansible$ terraform state list
+No state file was found!
+
+State management commands require a state file. Run this command
+in a directory where Terraform has been run or use the -state flag
+to point the command to a specific state location.
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/ansible$ cd ..
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03$ ls
+ansible  lab03_evidence.odt  README.md  terraform
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03$ cd terraform/
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/terraform$ terraform state list
+azurerm_linux_virtual_machine.lab
+azurerm_network_interface.lab
+azurerm_public_ip.lab
+azurerm_resource_group.lab
+azurerm_subnet.lab
+azurerm_virtual_network.lab
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/terraform$ 
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/terraform$ ssh -i ~/.ssh/id_rsa adminuser@4.236.131.93
+Welcome to Ubuntu 18.04.6 LTS (GNU/Linux 5.4.0-1109-azure x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue May  6 22:56:51 UTC 2025
+
+  System load:  0.0               Processes:           104
+  Usage of /:   4.6% of 28.89GB   Users logged in:     0
+  Memory usage: 21%               IP address for eth0: 10.0.2.4
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Infrastructure is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Infra to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+New release '20.04.6 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Tue May  6 22:52:35 2025 from 191.92.22.183
+adminuser@lab-vm:~$ uname -a
+Linux lab-vm 5.4.0-1109-azure #115~18.04.1-Ubuntu SMP Mon May 22 20:06:37 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux
+adminuser@lab-vm:~$ time
+
+real	0m0.000s
+user	0m0.000s
+sys	0m0.000s
+adminuser@lab-vm:~$ date
+Tue May  6 22:56:58 UTC 2025
+adminuser@lab-vm:~$ exit
+logout
+Connection to 4.236.131.93 closed.
+pauloenrique@pauloenrique-Latitude-E7450:~/Documents/Development/Ansible-labs/Lab03/terraform$ 
+
+

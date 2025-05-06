@@ -1,0 +1,5 @@
+---
+# Variables globales para todos los hosts
+company_name: "ACME Corp"
+env_type: "production"
+system_info_path: "/var/log/system_info.txt"

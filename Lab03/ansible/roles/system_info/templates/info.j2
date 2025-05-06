@@ -1,0 +1,23 @@
+System Information Report - {{ ansible_date_time.date }}
+
+Hostname: {{ ansible_facts['hostname'] }}
+OS: {{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }}
+Architecture: {{ ansible_facts['architecture'] }}
+Kernel: {{ ansible_facts['kernel'] }}
+
+CPU Cores: {{ ansible_facts['processor_vcpus'] }}
+Memory: {{ ansible_facts['memtotal_mb'] }} MB
+
+Network Interfaces:
+{% for interface in ansible_facts['interfaces'] %}
+- {{ interface }}:
+  {% if ansible_facts[interface]['ipv4'] is defined %}
+  - IPv4: {{ ansible_facts[interface]['ipv4']['address'] }}
+  {% endif %}
+  {% if ansible_facts[interface]['macaddress'] is defined %}
+  - MAC: {{ ansible_facts[interface]['macaddress'] }}
+  {% endif %}
+{% endfor %}
+
+Environment: {{ environment }}
+Company: {{ company_name }}

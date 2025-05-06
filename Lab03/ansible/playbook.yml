@@ -1,0 +1,9 @@
+---
+- name: Laboratorio de Variables y Facts
+  hosts: azure_vms
+
+  vars_files:
+    - group_vars/all.yml
+
+  roles:
+    - system_info

@@ -1,0 +1,25 @@
+---
+- name: Gather system facts
+  setup:
+
+- name: Display OS information
+  debug:
+    msg: "Sistema operativo: {{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }}"
+
+- name: Display memory information
+  debug:
+    msg: "Memoria total: {{ ansible_facts['memtotal_mb'] }}MB"
+
+- name: Create system info file
+  template:
+    src: info.j2
+    dest: "{{ system_info_path }}"
+    owner: root
+    group: root
+    mode: '0644'
+  notify: restart syslog
+  become: true
+
+- name: Show custom variable
+  debug:
+    msg: "Nombre de la compañía: {{ company_name }}"

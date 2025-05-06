@@ -1,0 +1,6 @@
+---
+- name: restart syslog
+  service:
+    name: "{{ 'syslog' if ansible_facts['distribution'] == 'Ubuntu' else 'rsyslog' }}"
+    state: restarted
+  ignore_errors: true
